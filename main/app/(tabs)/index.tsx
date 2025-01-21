@@ -4,15 +4,17 @@ import { StyleSheet, View , Text, ScrollView} from 'react-native';
 import { HeaderButton } from '../../components/HeaderButton';
 
 import { ScreenContent } from '~/components/ScreenContent';
+import Login from '../(auth)/login';
 
 export default function Home() {
   return (
     <>
       <Stack.Screen options={{ title: 'Tab One' }} />
-      <ScrollView style={styles.container} className=' h-full bg-blue-500'>
-        <Link href="/(test)/alo" asChild> 
+      <ScrollView className=' h-full bg-blue-500'>
+        {/* <Link href="/(test)/alo" asChild> 
           <HeaderButton />
-        </Link>
+        </Link> */}
+        <Login />
       </ScrollView>
     </>
   );
