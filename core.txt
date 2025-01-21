@@ -1,0 +1,53 @@
+<program> ::= <block> .
+
+<block> ::= "BEGIN" <statement_list> "END"
+
+<statement_list> ::= <statement> { ";" <statement> }
+
+<statement> ::= <assignment_statement>
+              | <if_statement>
+              | <while_statement>
+              | <read_statement>
+              | <write_statement>
+
+<assignment_statement> ::= <variable> ":=" <expression>
+
+<if_statement> ::= "IF" <condition> "THEN" <block> [ "ELSE" <block> ]
+
+<while_statement> ::= "WHILE" <condition> "DO" <block>
+
+<read_statement> ::= "READ" "(" <variable_list> ")"
+
+<write_statement> ::= "WRITE" "(" <expression_list> ")"
+
+<condition> ::= <expression> <relational_operator> <expression>
+
+<relational_operator> ::= "=" | "<>" | "<" | ">" | "<=" | ">="
+
+<expression> ::= <term> { <additive_operator> <term> }
+
+<term> ::= <factor> { <multiplicative_operator> <factor> }
+
+<factor> ::= <variable>
+           | <number>
+           | "(" <expression> ")"
+
+<variable> ::= <identifier>
+
+<number> ::= <unsigned_integer>
+
+<identifier> ::= <letter> { <letter> | <digit> }
+
+<unsigned_integer> ::= <digit> { <digit> }
+
+<additive_operator> ::= "+" | "-"
+
+<multiplicative_operator> ::= "*" | "/"
+
+<variable_list> ::= <variable> { "," <variable> }
+
+<expression_list> ::= <expression> { "," <expression> }
+
+<letter> ::= "A" | "B" | "C" | ... | "Z" | "a" | "b" | "c" | ... | "z"
+
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
