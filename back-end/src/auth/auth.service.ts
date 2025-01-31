@@ -11,7 +11,7 @@ export class AuthService {
 
     constructor( 
         @InjectModel(User.name) private userModel: Model<User>, 
-        // private jwtService: JwtService        
+        private jwtService: JwtService        
     ){}
 
     async register ( loginDto: LoginDto ): Promise<{ message: string, user: object | null }> {
@@ -37,31 +37,28 @@ export class AuthService {
             throw new BadRequestException('Failed to create user in the database');
         }
     }
-    
+
     async login ( loginDto: LoginDto ): Promise<{ token: string }> {
         const { email, password } = loginDto;
 
-        const token = "hello";
-        return { token };
+        const user = await this.userModel.findOne({ email })
+        if( !user ) throw new Error('User not found');
 
-        // const user = await this.userModel.findOne({ email })
-        // if( !user ) throw new Error('User not found');
+        try {
+            const isMatch = await bcrypt.compare(password, user.password)
+            if( !isMatch ) throw new Error('Password incorrect');
 
-        // try {
-        //     const isMatch = await bcrypt.compare(password, user.password)
-        //     if( !isMatch ) throw new Error('Password incorrect');
+            const token = this.jwtService.sign({ 
+                userId: user._id, 
+                name: user.name,
+                email: user.email, 
+            });
 
-        //     const token = this.jwtService.sign({ 
-        //         userId: user._id, 
-        //         name: user.name,
-        //         email: user.email, 
-        //     });
+            return { token };
 
-        //     return { token };
-
-        // } catch (error) {
-        //     console.error('Login error:', error);
-        //     throw new Error('Login failed');
-        // }
+        } catch (error) {
+            console.error('Login error:', error);
+            throw new Error('Login failed');
+        }
     }
 }
