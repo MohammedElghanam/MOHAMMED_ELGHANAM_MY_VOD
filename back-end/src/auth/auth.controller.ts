@@ -7,6 +7,20 @@ import { Response } from 'express'
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Post('/register')
+  async register(@Body() loginDto: LoginDto, @Res() res: Response): Promise<Response> {
+      try {
+          const result = await this.authService.register(loginDto);
+          return res.status(201).json({
+              message: result.message,
+              user: result.user,
+          });
+      } catch (error) {
+          return res.status(400).json({
+              message: error.message,
+          });
+      }
+  }
 
   @Post('/login')
   async login (@Body() loginDto: LoginDto, @Res() res: Response): Promise<Response> {

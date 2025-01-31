@@ -14,6 +14,30 @@ export class AuthService {
         // private jwtService: JwtService        
     ){}
 
+    async register ( loginDto: LoginDto ): Promise<{ message: string, user: object | null }> {
+        const { name, email, password }= loginDto;
+
+        const existingUser = await this.userModel.findOne({ email });
+        if (existingUser) throw new BadRequestException('Email is already in use');
+
+        try {
+            const hashPassword = await bcrypt.hash(password, 10)
+            const user= await this.userModel.create({
+                name,
+                email,
+                password: hashPassword
+            })
+
+            return {
+                message: "The user has been created successfully and is ready to use the system.",
+                user
+            }
+        } catch (error) {
+            console.error('Error creating user:', error);
+            throw new BadRequestException('Failed to create user in the database');
+        }
+    }
+    
     async login ( loginDto: LoginDto ): Promise<{ token: string }> {
         const { email, password } = loginDto;
 
