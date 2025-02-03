@@ -1,24 +1,43 @@
+interface ValidationParams {
+  email: string;
+  password: string;
+  name?: string;
+  confirmPassword?: string;
+  key: string;
+}
 
-const validate = (email: string, password: string, key: string, name: string, confirmPassword: string) => {
-    const errors = {
-        email: '',
-        password: '',
-    };
 
+const validate = ({ email = '', password = '', name = '', confirmPassword = '', key = '' }: ValidationParams) => {
+    
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-        errors.email = 'Email is required';
-    } else if (!emailPattern.test(email)) {
-        errors.email = 'Please enter a valid email address';
-    }
+    
 
-    if (!password) {
-      errors.password = 'Password is required';
-    } else if (password.length < 8) {
-      errors.password = 'Password must be at least 8 characters';
-    }
+    const errors: { [key: string]: string } = {};
 
-    return errors; 
+  switch (key) {
+    case 'login':
+      if (!email) errors.email = 'Email is required';
+      if (!password) errors.password = 'Password is required';
+      break;
+
+    case 'register':
+      if (!name) errors.name = 'Name is required';
+      if (!email) errors.email = 'Email is required';
+      if (!emailPattern.test(email)) errors.email = 'Please enter a valid email address';
+      if (!password) errors.password = 'Password is required';
+      if (password.length < 8) errors.password = 'Password must be at least 8 characters';
+      if (!confirmPassword) {
+        errors.confirmPassword = 'Confirm Password is required';
+      } else if (password !== confirmPassword) {
+        errors.confirmPassword = 'Passwords must match';
+      }
+      break;
+
+    default:
+      break;
+  }
+
+  return errors;
 };
 
 export { validate };

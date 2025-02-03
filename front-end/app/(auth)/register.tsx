@@ -3,14 +3,14 @@ import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, KeyboardAvo
 import { useNavigation } from '@react-navigation/native';
 import LineWithText from '@/components/UI/LineWithText';
 import { Ionicons } from '@expo/vector-icons';
+import useRegister from '@/hooks/auth/useRegister';
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const navigation = useNavigation();
+    
+
+    const {name, setName, email, setEmail, password, setPassword, confirmPassword, setConfirmPassword, handleNavigation} = useRegister();
+
 
   return (
     <KeyboardAvoidingView
@@ -82,7 +82,7 @@ const Register = () => {
 
         <View style={styles.loginLinkContainer}>
           <Text style={styles.loginText}>Already have an account? </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('login')}>
+          <TouchableOpacity onPress={handleNavigation}>
             <Text style={styles.loginLink}>Login here</Text>
           </TouchableOpacity>
         </View>

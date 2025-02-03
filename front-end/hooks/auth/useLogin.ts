@@ -2,16 +2,18 @@ import { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 import { validate } from "@/validation/login";
+import { useRouter } from 'expo-router';
+
 
 const useLogin = () => {
-    const navigation = useNavigation();
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState({email: '', password: '' });
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     const handleSubmit = async () => {
 
-        const validationErrors = validate(email, password, 'login');
+        const validationErrors = validate({ email: email, password: password, key: 'login' });
         setErrors(validationErrors);
 
         // if (!validationErrors.email && !validationErrors.password) {
@@ -49,7 +51,7 @@ const useLogin = () => {
     
 
     const handleNavigation = () => {
-        navigation.navigate('register');
+        router.push('/register');
     };
 
     return {
