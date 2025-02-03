@@ -1,5 +1,5 @@
 
-const validate = (email: string, password: string) => {
+const validate = (email: string, password: string, key: string, name: string, confirmPassword: string) => {
     const errors = {
         email: '',
         password: '',

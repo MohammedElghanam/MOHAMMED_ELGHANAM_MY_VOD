@@ -18,16 +18,10 @@ const Login = () => {
         setPassword,
         handleSubmit,
         errors,
+        handleNavigation,
     } = useLogin();
 
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-
-  const navigation = useNavigation();
-
-  const handleLogin = () => {
-    navigation.navigate('register');
-  };
+  
 
   return (
     
@@ -87,7 +81,7 @@ const Login = () => {
 
         <View style={{ flexDirection: 'row', justifyContent: 'center', marginBlockStart: 10}}>
             <Text style={styles.user}>New user? </Text>
-            <TouchableOpacity onPress={handleLogin}>
+            <TouchableOpacity onPress={handleNavigation}>
                 <Text style={styles.link}>Create account here</Text>
             </TouchableOpacity>
         </View>
