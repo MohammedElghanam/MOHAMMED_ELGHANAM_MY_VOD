@@ -23,7 +23,7 @@ const useRegister = () => {
             const formData = { name, email, password }
             try {
                 console.log('dkhal hna');
-                const response = await axios.post('http://100.75.46.177:3000/auth/register', formData);
+                const response = await axios.post('http://:3000/auth/register', formData);
                 console.log('dkhal hna2');
 
                 if (response.status === 200) {
