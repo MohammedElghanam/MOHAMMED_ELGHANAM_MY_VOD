@@ -16,6 +16,8 @@ const useLogin = () => {
         const validationErrors = validate({ email: email, password: password, key: 'login' });
         setErrors(validationErrors);
 
+        const isErrorsEmpty = Object.keys(errors).length === 0;
+
         // if (!validationErrors.email && !validationErrors.password) {
 
         //     const formData = { email, password}
