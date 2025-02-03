@@ -6,13 +6,22 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-
+import useLogin from '@/hooks/auth/useLogin';
  
 
 const Login = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const {
+        email,
+        setEmail,
+        password,
+        setPassword,
+        handleSubmit,
+        errors,
+    } = useLogin();
+
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
 
@@ -28,33 +37,44 @@ const Login = () => {
             style={{ width: 200, height: 200, alignSelf: 'center' , marginBottom: 1}}
         />
         
-        <View style={styles.inputContainer}>
-            <Ionicons name="mail-outline" size={20} color="gray" />
+        <View style={[ styles.inputContainer, errors.email ? { borderColor: 'red' } : null ]}>
+            <Ionicons 
+                name="mail-outline" 
+                size={20} 
+                color={ errors.email ? 'red' : "gray" } 
+            />
             <TextInput
                 style={styles.input}
                 placeholder="Email"
+                placeholderTextColor={errors.email ? 'red' : 'gray'}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
             />
         </View> 
-        <Text style={ styles.error}>error</Text>
+        {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+        
 
-        <View style={styles.inputContainer}>
-            <Ionicons name="lock-closed-outline" size={20} color="gray" />
+        <View style={[ styles.inputContainer, errors.password ? { borderColor: 'red' } : null ]}>
+            <Ionicons 
+                name="lock-closed-outline" 
+                size={20} 
+                color={ errors.password ? 'red' : "gray" } 
+            />
             <TextInput
                 style={styles.input}
                 placeholder="Password"
+                placeholderTextColor={errors.password ? 'red' : 'gray'}
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
             />
         </View>
-        <Text style={ styles.error}>error</Text>
+        {errors.password && <Text style={styles.error}>{errors.password}</Text>}
 
         <View style={styles.btn}>
-            <Text style={styles.text} onPress={handleLogin} >Login</Text>
+            <Text style={styles.text} onPress={handleSubmit} >Login</Text>
         </View>
 
         <View>
