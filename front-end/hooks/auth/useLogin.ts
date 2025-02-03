@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
-import { validate } from "@/validation/login";
+import { validate } from "@/validation/authValidation";
 import { useRouter } from 'expo-router';
 
 

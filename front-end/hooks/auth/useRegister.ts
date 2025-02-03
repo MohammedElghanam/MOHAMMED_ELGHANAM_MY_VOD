@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
-import { validate } from "@/validation/login";
+import { validate } from "@/validation/authValidation";
 import { useRouter } from 'expo-router';
 
 const useRegister = () => {
@@ -10,9 +10,11 @@ const useRegister = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     const handleSubmit = async () => {
         const validationErrors = validate({ email: email, password: password, confirmPassword: confirmPassword, name: name, key: 'register' });
+        setErrors(validationErrors);
     };
 
     const handleNavigation = () => {
@@ -30,6 +32,7 @@ const useRegister = () => {
         setConfirmPassword,
         handleSubmit,
         handleNavigation,
+        errors,
     };
 
 };

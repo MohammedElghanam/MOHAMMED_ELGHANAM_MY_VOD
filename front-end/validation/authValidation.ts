@@ -22,6 +22,7 @@ const validate = ({ email = '', password = '', name = '', confirmPassword = '', 
 
     case 'register':
       if (!name) errors.name = 'Name is required';
+      if (name.length < 3) errors.name = 'The name must be at least 4 characters';
       if (!email) errors.email = 'Email is required';
       if (!emailPattern.test(email)) errors.email = 'Please enter a valid email address';
       if (!password) errors.password = 'Password is required';
