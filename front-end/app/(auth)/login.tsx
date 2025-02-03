@@ -5,11 +5,11 @@ import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } fr
 import { useNavigation } from '@react-navigation/native';
 
 
-const LoginScreen = () => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigation = useNavigation();
+//   const navigation = useNavigation();
 
   const handleLogin = () => {
     // navigation.navigate('Register');
@@ -18,7 +18,7 @@ const LoginScreen = () => {
   return (
     <View style={styles.container}>
         <Image
-            source={require('../assets/images/10780021_19197947.jpg')}
+            source={require('../../assets/images/10780021_19197947.jpg')}
             style={{ width: 200, height: 200, alignSelf: 'center' , marginBottom: 15}}
         />
         <TextInput
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   user: {
-    color: '#333', // Default text color
+    color: '#333',
   },
 });
 
-export default LoginScreen;
+export default Login;
