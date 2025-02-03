@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
  
 
@@ -19,6 +21,7 @@ const Login = () => {
   };
 
   return (
+    
     <View style={styles.container}>
         <Image
             source={require('../../assets/images/10780021_19197947.jpg')}
@@ -26,33 +29,34 @@ const Login = () => {
         />
         
         <View style={styles.inputContainer}>
-      <Ionicons name="mail-outline" size={20} color="gray" />
-    <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-    </View> 
+            <Ionicons name="mail-outline" size={20} color="gray" />
+            <TextInput
+                style={styles.input}
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+            />
+        </View> 
+        <Text style={ styles.error}>error</Text>
 
-       
-
-<View style={styles.inputContainer}>
-      <Ionicons name="lock-closed-outline" size={20} color="gray" />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-    </View>
+        <View style={styles.inputContainer}>
+            <Ionicons name="lock-closed-outline" size={20} color="gray" />
+            <TextInput
+                style={styles.input}
+                placeholder="Password"
+                secureTextEntry
+                value={password}
+                onChangeText={setPassword}
+            />
+        </View>
+        <Text style={ styles.error}>error</Text>
 
         <View style={styles.btn}>
             <Text style={styles.text} onPress={handleLogin} >Login</Text>
         </View>
+
         <View>
             <GoogleSignInButton />
         </View>
@@ -121,6 +125,11 @@ const styles = StyleSheet.create({
   user: {
     color: '#333',
   },
+  error: {
+    paddingHorizontal: 10,
+    color: 'red',
+    fontSize: 12,
+  }
 });
 
 export default Login;
