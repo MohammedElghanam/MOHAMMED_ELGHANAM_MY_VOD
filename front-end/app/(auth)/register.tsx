@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LineWithText from '@/components/UI/LineWithText';
+import { Ionicons } from '@expo/vector-icons';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -22,15 +23,21 @@ const Register = () => {
           style={styles.image}
         />
 
-        <TextInput
+
+<View style={styles.inputContainer}>
+<Ionicons name="person-outline" size={20} color="gray" />
+<TextInput
           style={styles.input}
           placeholder="Full Name"
           value={name}
           onChangeText={setName}
           autoCapitalize="words"
         />
+    </View>  
 
-        <TextInput
+    <View style={styles.inputContainer}>
+      <Ionicons name="mail-outline" size={20} color="gray" />
+    <TextInput
           style={styles.input}
           placeholder="Email"
           value={email}
@@ -38,15 +45,25 @@ const Register = () => {
           keyboardType="email-address"
           autoCapitalize="none"
         />
+    </View> 
 
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-        />
+       
 
+<View style={styles.inputContainer}>
+      <Ionicons name="lock-closed-outline" size={20} color="gray" />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+    </View>
+
+    
+
+    <View style={styles.inputContainer}>
+      <Ionicons name="key-outline" size={20} color="gray" />
         <TextInput
           style={styles.input}
           placeholder="Confirm Password"
@@ -54,6 +71,8 @@ const Register = () => {
           value={confirmPassword}
           onChangeText={setConfirmPassword}
         />
+    </View>  
+        
 
         <TouchableOpacity style={styles.btn} onPress={() => {}}>
           <Text style={styles.btnText}>Create Account</Text>
@@ -86,16 +105,30 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     alignSelf: 'center',
-    marginBottom: 16,
+    marginBottom: 1,
+  },
+//   input: {
+//     height: 50,
+//     borderColor: '#ccc',
+//     borderWidth: 1,
+//     borderRadius: 5,
+//     marginBottom: 10,
+//     padding: 15,
+//   },
+inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    margin: 6,
   },
   input: {
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 15,
-    paddingHorizontal: 15,
-    fontSize: 16,
+    height: 40,
+    flex: 1,
+    marginLeft: 10,
+    paddingVertical: 8,
   },
   btn: {
     height: 50,
@@ -103,7 +136,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 10,
+    marginVertical: 5,
     elevation: 2,
   },
   btnText: {
@@ -130,5 +163,49 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
+
+// const styles = StyleSheet.create({
+//     container: {
+//       flex: 1,
+//       justifyContent: 'center',
+//       alignContent: 'center',
+//       padding: 20,
+//       backgroundColor: '#fff',
+//     },
+//     header: {
+//       fontSize: 24,
+//       fontWeight: 'bold',
+//       marginBottom: 20,
+//       textAlign: 'center',
+//     },
+//     input: {
+//       height: 50,
+//       borderColor: '#ccc',
+//       borderWidth: 1,
+//       borderRadius: 5,
+//       marginBottom: 10,
+//       padding: 15,
+//     },
+//     btn: {
+//       height: 50,
+//       backgroundColor: '#6d1fad',
+//       padding: 10,
+//       borderRadius: 5,
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       marginBottom: 10,
+//     },
+//     text: {
+//       color: 'white',
+//       fontSize: 16,
+//     },
+//     link: {
+//       color: '#3b82f6', 
+//       textDecorationLine: 'underline',
+//     },
+//     user: {
+//       color: '#333',
+//     },
+//   });
 
 export default Register;

@@ -3,37 +3,53 @@ import LineWithText from '@/components/UI/LineWithText';
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
+ 
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
-//   const navigation = useNavigation();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+  const navigation = useNavigation();
 
   const handleLogin = () => {
-    // navigation.navigate('Register');
+    navigation.navigate('register');
   };
 
   return (
     <View style={styles.container}>
         <Image
             source={require('../../assets/images/10780021_19197947.jpg')}
-            style={{ width: 200, height: 200, alignSelf: 'center' , marginBottom: 15}}
+            style={{ width: 200, height: 200, alignSelf: 'center' , marginBottom: 1}}
         />
-        <TextInput
-            style={styles.input}
-            placeholder='Username'
-            value={username}
-            onChangeText={setUsername}
+        
+        <View style={styles.inputContainer}>
+      <Ionicons name="mail-outline" size={20} color="gray" />
+    <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
-        <TextInput
-            style={styles.input}
-            placeholder='Password'
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-        />
+    </View> 
+
+       
+
+<View style={styles.inputContainer}>
+      <Ionicons name="lock-closed-outline" size={20} color="gray" />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+    </View>
+
         <View style={styles.btn}>
             <Text style={styles.text} onPress={handleLogin} >Login</Text>
         </View>
@@ -61,6 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     padding: 20,
+    backgroundColor: '#fff',
   },
   header: {
     fontSize: 24,
@@ -68,13 +85,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  input: {
-    height: 50,
-    borderColor: '#ccc',
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 10,
-    padding: 15,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    margin: 6,
+  },
+  input: {
+    height: 40,
+    flex: 1,
+    marginLeft: 10,
+    paddingVertical: 8,
   },
   btn: {
     height: 50,
@@ -84,6 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
+    marginBlockStart: 10,
   },
   text: {
     color: 'white',
