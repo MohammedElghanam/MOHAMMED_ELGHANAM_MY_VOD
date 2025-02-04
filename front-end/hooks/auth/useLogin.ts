@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 import { validate } from "@/validation/authValidation";
 import { useRouter } from 'expo-router';
+import { Alert } from "react-native";
 
 
 const useLogin = () => {
@@ -16,37 +17,35 @@ const useLogin = () => {
         const validationErrors = validate({ email: email, password: password, key: 'login' });
         setErrors(validationErrors);
 
-        const isErrorsEmpty = Object.keys(errors).length === 0;
+        const isErrorsEmpty = Object.keys(validationErrors).length === 0;
 
-        // if (!validationErrors.email && !validationErrors.password) {
+        if (isErrorsEmpty) {
 
-        //     const formData = { email, password}
-        //     try {
-        //         const response = await axios.post('http://localhost:5001/auth/login', formData);
+            const formData = { email, password}
+            try {
+                const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/login`, formData);
 
-        //         if (response.status === 200) {
-        //             console.log('dkhal hna');
-        //             console.log(response);
+                if (response.status === 200) {
+                    console.log('dkhal hna');
+                    console.log(response.data);
                     
                     
-        //             setEmail('');
-        //             setPassword('');
-        //             localStorage.setItem('token', response.data.token);       
-        //             navigate.navigate('register');
-        //         }
+                    setEmail('');
+                    setPassword('');
+                    await AsyncStorage.setItem('token', response.data.token);
+                    router.replace('/(home)/profile');
+                }
 
-        //     } catch (error) {
-        //         if (error.response && error.response.status === 400) {
-        //             setErrorMessage(error.response.data.message);
-        //             console.log('Error registering user:', error.response.data.message);
-        //         } else {
-        //             console.log('error');
-                    
-        //             setErrorMessage('An unexpected error occurred');
-        //             console.log('Error registering user:', error.response.data.message);
-        //         }
-        //     }            
-        // }
+            } catch (error: any) {
+                if (error.response && error.response.status === 400) {
+                    Alert.alert(error.response.data.message);
+                    console.log('Error login user1:', error.response.data);
+                } else {
+                    console.log('error');
+                    console.log('Error login user:', error.response.data);
+                }
+            }            
+        }
 
     }
 
