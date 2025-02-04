@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { validate } from "@/validation/authValidation";
 import { useRouter } from 'expo-router';
+import { Alert } from "react-native";
+
 
 const useRegister = () => {
     const router = useRouter();
@@ -22,14 +24,11 @@ const useRegister = () => {
 
             const formData = { name, email, password }
             try {
-                console.log('dkhal hna');
-                const response = await axios.post('http://:3000/auth/register', formData);
-                console.log('dkhal hna2');
+                const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/auth/register`, formData);
 
-                if (response.status === 200) {
-                    console.log('dkhal hna');
-                    console.log(response);
-                    
+                if (response.status === 201) {
+                    console.log(response.data);
+                    Alert.alert(response.data.message);
                     setName('');
                     setEmail('');
                     setPassword('');    

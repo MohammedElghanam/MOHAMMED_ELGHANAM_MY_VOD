@@ -29,7 +29,7 @@ export class AuthService {
             })
 
             return {
-                message: "The user has been created successfully and is ready to use the system.",
+                message: "The user has been created successfully.",
                 user
             }
         } catch (error) {
