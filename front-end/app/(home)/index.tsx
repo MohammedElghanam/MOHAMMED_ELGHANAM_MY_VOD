@@ -97,34 +97,47 @@
 // export default Index;
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSelector } from 'react-redux';
-import useMovies from '../../hooks/movies/useMovies';
-export default function Movies() {
-  const router = useRouter();
+import useMovies from '@/hooks/movies/useMovies';
+import MovieDetails from '@/components/screens/movieDetails';
+
+export default function Index() {
+//   const router = useRouter();
   useMovies();
+  const [bool, setBool] = useState(false);
 
   const movies = useSelector((state: any) => state.movies.moviesList);
+
+  const [selectedMovie, setSelectedMovie] = useState(null); 
+
+  const showDetails = (movie: any) => {
+    setSelectedMovie(movie);
+    // console.log(movie);
+    
+  };
 
   return (
     <View>
       <Text>Liste des Films</Text>
       <FlatList
         data={movies}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
-          <View>
-            <Text>{item.title}</Text>
+          <View style={{ marginBottom: 10 }}>
+            <Text style={{ fontSize: 18 }}>{item.title}</Text>
             <Button
               title="Voir Détails"
-            //   onPress={() => router.push(`/(movies)/${item._id}`)}
+              onPress={() => showDetails(item)}
             />
           </View>
         )}
       />
+      {selectedMovie && <MovieDetails movie={selectedMovie} />}
     </View>
+
   );
 }
 

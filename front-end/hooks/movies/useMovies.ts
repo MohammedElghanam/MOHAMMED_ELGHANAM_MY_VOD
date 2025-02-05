@@ -6,22 +6,37 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const useMovies = () => {
-    const token = AsyncStorage.getItem('token');
-    console.log(token);    
+    
     const dispatch = useDispatch();
+
+    
 
   useEffect(() => {
     const fetchMovies = async () => {
+
+        
       try {
-        const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL_2}/api/films/read`, {
+
+        const token = await AsyncStorage.getItem('token');
+        // console.log(token);    
+        if (!token) {
+            throw new Error('Token manquant');
+        }else{
+            console.log('token exist');
+        }
+
+        // console.log('dkhal');    
+
+        const response = await axios.get('http://192.168.43.24:5000/api/films/read', {
             headers: {
             'Authorization': `Bearer ${token}`
             }
         });
+        // console.log('wslx');    
         const movies = response.data;
         dispatch(setMovies(movies));
-      } catch (error) {
-        console.error("Erreur lors de la récupération des films:", error);
+      } catch (error: any) {
+        console.log("Erreur lors de la récupération des films:", error);
       }
     };
 
