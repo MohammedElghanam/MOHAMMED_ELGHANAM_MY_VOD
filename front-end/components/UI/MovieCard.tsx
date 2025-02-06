@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-// import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 
 interface Movie {
   id: string;
@@ -15,26 +15,30 @@ interface Movie {
   views: string;
   date: string;
   createdAt: string;
+  duration: string;
 }
 
 export default function MovieCard({ movie, showD }: { movie: Movie; showD: (movie: Movie) => void }) {
     const createdAt = new Date(movie.createdAt);
-    // const timeAgo = formatDistanceToNow(createdAt, { addSuffix: true });
-    // console.log(timeAgo);
+    const timeAgo = formatDistanceToNow(createdAt, { addSuffix: true });
+    console.log(timeAgo);
     
   return (
     <TouchableOpacity style={styles.card} onPress={() => showD(movie)}>
-      <Image 
-        source={{ uri: `${process.env.EXPO_PUBLIC_MEDIA_URL}${movie.imageUrl.split(':9000')[1]}` }} 
-        style={styles.thumbnail} 
-      />
+      <View style={styles.thumbnailContainer}>
+        <Image
+          source={{ uri: `${process.env.EXPO_PUBLIC_MEDIA_URL}${movie.imageUrl.split(':9000')[1]}` }}
+          style={styles.thumbnail}
+        />
+        <Text style={styles.duration}>{movie.duration}</Text> {/* Add duration below the image */}
+      </View>
 
       <View style={styles.infoContainer}>
         <Image source={{ uri: `${process.env.EXPO_PUBLIC_MEDIA_URL}${movie.userId.image.split(':9000')[1]}` }} style={styles.creatorImage} />
 
         <View style={styles.textContainer}>
           <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
-          <Text style={styles.subtitle}>{movie.userId.name} • {movie.views} vues •</Text>
+          <Text style={styles.subtitle}>{movie.userId.name} • {movie.views} vues • { timeAgo }</Text>
         </View>
 
         <TouchableOpacity style={styles.menuIcon}>
@@ -48,6 +52,9 @@ export default function MovieCard({ movie, showD }: { movie: Movie; showD: (movi
 const styles = StyleSheet.create({
   card: {
     marginBottom: 16,
+  },
+  thumbnailContainer: {
+    position: 'relative',
   },
   thumbnail: {
     width: '100%',
@@ -81,5 +88,16 @@ const styles = StyleSheet.create({
   },
   menuIcon: {
     padding: 8,
+  },
+  duration: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    fontSize: 14,
+    color: 'white',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    borderRadius: 5,
   },
 });

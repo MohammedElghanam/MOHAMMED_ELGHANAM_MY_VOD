@@ -19,13 +19,17 @@ const Index = () => {
   const movies = useSelector((state: any) => state.movies.moviesList);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  const showDetails = (movie: Movie) => {
-    setSelectedMovie(movie);
-  };
+  const [showMovieDetails, setShowMovieDetails] = useState(false);
 
-    const closeDetails = () => {
-        setSelectedMovie(null);
-    };
+const showDetails = (movie: Movie) => {
+  setSelectedMovie(movie);
+  setShowMovieDetails(true); // Masquer le header et la tab bar
+};
+
+const closeDetails = () => {
+  setSelectedMovie(null);
+  setShowMovieDetails(false); // Réafficher le header et la tab bar
+};
 
   return (
     <View style={styles.container}>

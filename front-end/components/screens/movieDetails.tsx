@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, Image } from 'react-native';
-import { Video } from 'expo-av';
+import { Video, ResizeMode } from 'expo-av';
 
 export default function MovieDetails({ movie, onClose }: any) {
     console.log("MEDIA_URL:", process.env.EXPO_PUBLIC_MEDIA_URL);
@@ -23,7 +23,7 @@ export default function MovieDetails({ movie, onClose }: any) {
         source={{ uri: `${process.env.EXPO_PUBLIC_MEDIA_URL}${movie.videoUrl.split(':9000')[1]}` }}
         style={{ width: '100%', height: 250, backgroundColor: 'red' }}
         useNativeControls
-        resizeMode="contain"
+        resizeMode={ResizeMode.CONTAIN}
         isLooping
       />
 
