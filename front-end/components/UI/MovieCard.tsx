@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+// import { formatDistanceToNow } from 'date-fns';
 
 interface Movie {
   id: string;
@@ -17,7 +18,9 @@ interface Movie {
 }
 
 export default function MovieCard({ movie, showD }: { movie: Movie; showD: (movie: Movie) => void }) {
-    console.log(movie);
+    const createdAt = new Date(movie.createdAt);
+    // const timeAgo = formatDistanceToNow(createdAt, { addSuffix: true });
+    // console.log(timeAgo);
     
   return (
     <TouchableOpacity style={styles.card} onPress={() => showD(movie)}>
@@ -31,7 +34,7 @@ export default function MovieCard({ movie, showD }: { movie: Movie; showD: (movi
 
         <View style={styles.textContainer}>
           <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
-          <Text style={styles.subtitle}>{movie.userId.name} • {movie.views} vues • {movie.createdAt}</Text>
+          <Text style={styles.subtitle}>{movie.userId.name} • {movie.views} vues •</Text>
         </View>
 
         <TouchableOpacity style={styles.menuIcon}>
