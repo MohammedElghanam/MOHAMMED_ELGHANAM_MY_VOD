@@ -11,7 +11,7 @@ export default function Index() {
             // await AsyncStorage.removeItem('token');
             const token = await AsyncStorage.getItem('token');
             if (token) {
-                router.replace('/(home)/index');
+                router.replace('/(home)/profile');
             } else {
                 router.replace('/(auth)/login');
             }

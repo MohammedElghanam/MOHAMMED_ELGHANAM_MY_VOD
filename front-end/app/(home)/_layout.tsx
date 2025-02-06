@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function HomeLayout() {
     
@@ -8,14 +9,24 @@ export default function HomeLayout() {
                 name="index"
                 options={{
                     title: 'Home',
-                    // tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+                    tabBarIcon: ({ color }) => <Ionicons name="home" size={20} color="black" />,
+                    tabBarLabelStyle: { color: 'black' },
                 }}
             />
             <Tabs.Screen
                 name="profile"
                 options={{
                     title: 'profile',
-                    // tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+                    tabBarIcon: ({ color }) => <Ionicons name="people" size={20} color="black" />,
+                    tabBarLabelStyle: { color: 'black' },
+                }}
+            />
+             <Tabs.Screen
+                name="users"
+                options={{
+                    title: 'users',
+                    tabBarIcon: ({ color }) => <Ionicons name="people" size={20} color="black" />,
+                    tabBarLabelStyle: { color: 'black' },
                 }}
             />
         </Tabs>

@@ -32,8 +32,8 @@ const useMovies = () => {
             'Authorization': `Bearer ${token}`
             }
         });
-        // console.log('wslx');    
         const movies = response.data;
+        console.log(movies);    
         dispatch(setMovies(movies));
       } catch (error: any) {
         console.log("Erreur lors de la récupération des films:", error);

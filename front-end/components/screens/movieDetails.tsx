@@ -13,16 +13,14 @@ export default function MovieDetails({ movie, onClose }: any) {
       <Text>Genre: {movie.categoryId.title}</Text>
       <Text>Année: {new Date(movie.releaseYear).getFullYear()}</Text>
 
-      {/* Affichage de l'image */}
-      {/* <Image
-        source={{  uri: `http://192.168.43.24:9000${movie.imageUrl.split(':9000')[1]}` }}
+      <Image
+        source={{  uri: `${process.env.EXPO_PUBLIC_MEDIA_URL}${movie.imageUrl.split(':9000')[1]}` }}
         style={{ width: '100%', height: 200, marginVertical: 10, backgroundColor: '#f0f0f0' }}
         resizeMode="cover"
-      /> */}
+      />
 
-      {/* Affichage de la vidéo */}
       <Video
-        source={{ uri: `http://192.168.43.24:9000${movie.videoUrl.split(':9000')[1]}` }}
+        source={{ uri: `${process.env.EXPO_PUBLIC_MEDIA_URL}${movie.videoUrl.split(':9000')[1]}` }}
         style={{ width: '100%', height: 250, backgroundColor: 'red' }}
         useNativeControls
         resizeMode="contain"
