@@ -1,17 +1,8 @@
-import { Stack, Tabs, useSegments } from 'expo-router';
-import { useRouter } from 'expo-router';
+import { Tabs } from 'expo-router';
 
 export default function HomeLayout() {
-    const segments: string[] = useSegments();
-    // const isMovieDetails = segments.includes('[slug]');
     
     return (
-        // <Stack>
-        //   <Stack.Screen name="profil" />
-        //   <Stack.Screen name="users" />
-        // </Stack>
-
-        // !isMovieDetails ? (
         <Tabs>
             <Tabs.Screen
                 name="index"
@@ -28,10 +19,5 @@ export default function HomeLayout() {
                 }}
             />
         </Tabs>
-        // ) : (
-        // <Stack>
-        //     <Stack.Screen name="[slug]" /> 
-        // </Stack>
-        // )
     );
 }
