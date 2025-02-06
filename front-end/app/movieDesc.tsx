@@ -3,6 +3,8 @@ import React from 'react'
 import MovieDetails from '@/components/screens/movieDetails';
 
 export default function MovieDesc({ movie, onClose }: any) {
+  console.log("test");
+  
   return (
     <View>
       <MovieDetails movie={movie} onClose={onClose} />

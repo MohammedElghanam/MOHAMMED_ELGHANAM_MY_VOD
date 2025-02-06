@@ -14,7 +14,16 @@ export default function Layout() {
     // </Stack>
 
     <Provider store={store}>
-      <Stack screenOptions={{ headerShown: false }} />
+      {/* <Stack screenOptions={{ headerShown: false }} /> */}
+      <Stack 
+        // initialRouteName="(auth)" 
+        screenOptions={{ headerShown: false }} 
+      >
+      <Stack.Screen name="(auth)" options={{ headerShown: false}} />
+      <Stack.Screen name="(home)" />
+      <Stack.Screen name="+not-found" />
+      <Stack.Screen name="movieDesc" />
+    </Stack>
     </Provider>
   );
 }

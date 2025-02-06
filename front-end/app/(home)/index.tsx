@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import useMovies from '@/hooks/movies/useMovies';
 import MovieDetails from '@/components/screens/movieDetails';
 import MovieCard from '@/components/UI/MovieCard';
+import MovieDesc from '../movieDesc';
 
 interface Movie {
   id: string;
@@ -18,18 +19,15 @@ const Index = () => {
 
   const movies = useSelector((state: any) => state.movies.moviesList);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  
 
-  const [showMovieDetails, setShowMovieDetails] = useState(false);
+  const showDetails = (movie: Movie) => {
+    setSelectedMovie(movie);
+  };
 
-const showDetails = (movie: Movie) => {
-  setSelectedMovie(movie);
-  setShowMovieDetails(true); // Masquer le header et la tab bar
-};
-
-const closeDetails = () => {
-  setSelectedMovie(null);
-  setShowMovieDetails(false); // Réafficher le header et la tab bar
-};
+    const closeDetails = () => {
+        setSelectedMovie(null);
+    };
 
   return (
     <View style={styles.container}>
@@ -42,6 +40,7 @@ const closeDetails = () => {
 
       {selectedMovie && (
         <View style={styles.detailsOverlay}>
+            {/* <MovieDesc movie={selectedMovie} onClose={closeDetails} /> */}
           <MovieDetails movie={selectedMovie} onClose={closeDetails} />
         </View>
       )}
