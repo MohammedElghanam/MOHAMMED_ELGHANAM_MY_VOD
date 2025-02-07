@@ -1,13 +1,17 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import MovieDetails from '@/components/screens/movieDetails';
+import { useLocalSearchParams } from 'expo-router';
 
-export default function MovieDesc({ movie, onClose }: any) {
+export default function MovieDesc() {
   console.log("test");
-  
+  const { movie } = useLocalSearchParams();
+  const movieData = movie ? JSON.parse(movie as string) : null;
+  console.log(movieData);
+
   return (
     <View>
-      <MovieDetails movie={movie} onClose={onClose} />
+      <MovieDetails movie={movieData} />
     </View>
   )
 }

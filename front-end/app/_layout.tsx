@@ -22,7 +22,7 @@ export default function Layout() {
       <Stack.Screen name="(auth)" options={{ headerShown: false}} />
       <Stack.Screen name="(home)" />
       <Stack.Screen name="+not-found" />
-      <Stack.Screen name="movieDesc" />
+      <Stack.Screen name="movieDesc" options={{ presentation: "modal", headerShown: false }} />
     </Stack>
     </Provider>
   );

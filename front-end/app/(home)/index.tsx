@@ -5,6 +5,7 @@ import useMovies from '@/hooks/movies/useMovies';
 import MovieDetails from '@/components/screens/movieDetails';
 import MovieCard from '@/components/UI/MovieCard';
 import MovieDesc from '../movieDesc';
+import { useRouter } from "expo-router"; 
 
 interface Movie {
   id: string;
@@ -19,10 +20,15 @@ const Index = () => {
 
   const movies = useSelector((state: any) => state.movies.moviesList);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-  
+  const router = useRouter();
 
   const showDetails = (movie: Movie) => {
-    setSelectedMovie(movie);
+    // setSelectedMovie(movie);
+    console.log(JSON.stringify(movie));
+    router.push({
+      pathname: "/movieDesc",
+      params: { movie: JSON.stringify(movie) }, 
+    });
   };
 
     const closeDetails = () => {
@@ -41,7 +47,7 @@ const Index = () => {
       {selectedMovie && (
         <View style={styles.detailsOverlay}>
             {/* <MovieDesc movie={selectedMovie} onClose={closeDetails} /> */}
-          <MovieDetails movie={selectedMovie} onClose={closeDetails} />
+          {/* <MovieDetails movie={selectedMovie} onClose={closeDetails} /> */}
         </View>
       )}
     </View>
