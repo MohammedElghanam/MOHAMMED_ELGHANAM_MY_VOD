@@ -38,7 +38,7 @@ export default function MovieDetails({ movie }: any) {
           source={{ uri: `${process.env.EXPO_PUBLIC_MEDIA_URL}${movie.videoUrl.split(':9000')[1]}` }}
           style={styles.videoPlayer}
           useNativeControls
-          resizeMode={ResizeMode.STRETCH}
+          resizeMode={ResizeMode.CONTAIN}
           isLooping
         />
       </View>
