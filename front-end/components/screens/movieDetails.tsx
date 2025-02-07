@@ -31,6 +31,7 @@ export default function MovieDetails({ movie }: any) {
   };
 
   return (
+    <View style={{ flex: 1 }}>
     <ScrollView contentContainerStyle={styles.container}>
       {/* Video Player */}
       <View style={styles.videoContainer}>
@@ -83,21 +84,22 @@ export default function MovieDetails({ movie }: any) {
           keyExtractor={(item) => item.id}
         />
       </View>
-
-      {/* Comment Input */}
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.commentInput}
-          placeholder="Add your review..."
-          value={newComment}
-          onChangeText={setNewComment}
-          multiline
-        />
-        <TouchableOpacity style={styles.postButton} onPress={handleAddComment}>
-          <Text style={styles.postButtonText}>Post</Text>
-        </TouchableOpacity>
-      </View>
     </ScrollView>
+
+    <View style={styles.fixedInputContainer}>
+      <TextInput
+        style={styles.commentInput}
+        placeholder="Add your review..."
+        placeholderTextColor="#888"
+        value={newComment}
+        onChangeText={setNewComment}
+        multiline
+      />
+      <TouchableOpacity style={styles.postButton} onPress={handleAddComment}>
+        <Text style={styles.postButtonText}>Post</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
   );
 }
 
@@ -126,12 +128,12 @@ const styles = StyleSheet.create({
     paddingRight: 12,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#fff',
   },
   title2: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 'bold',
     color: '#fff',
   },
@@ -155,49 +157,21 @@ const styles = StyleSheet.create({
   commentsTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#fff',
   },
   comment: {
     marginTop: 10,
     padding: 10,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#333',
     borderRadius: 5,
   },
   commentUser: {
     fontWeight: 'bold',
-    color: '#333',
+    color: '#fff',
   },
   commentText: {
     fontSize: 14,
     color: '#666',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
-    borderTopWidth: 1,
-    borderColor: '#ddd',
-    paddingTop: 10,
-  },
-  commentInput: {
-    flex: 1,
-    padding: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: '#ddd',
-    marginRight: 10,
-    height: 40,
-    backgroundColor: '#f9f9f9',
-  },
-  postButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-    backgroundColor: '#007bff',
-    borderRadius: 5,
-  },
-  postButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
   },
   infoContainer: {
     flexDirection: 'row',
@@ -218,5 +192,37 @@ const styles = StyleSheet.create({
   },
   menuIcon: {
     padding: 8,
+  },
+  fixedInputContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#1a1a1a',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#333',
+  },
+  commentInput: {
+    flex: 1,
+    padding: 12,
+    borderRadius: 25,
+    marginRight: 10,
+    backgroundColor: '#333',
+    color: '#fff',
+    fontSize: 14,
+    maxHeight: 100,
+  },
+  postButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    backgroundColor: '#007bff',
+    borderRadius: 20,
+  },
+  postButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });

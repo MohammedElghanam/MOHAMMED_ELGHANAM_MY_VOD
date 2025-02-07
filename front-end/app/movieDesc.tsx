@@ -10,7 +10,7 @@ export default function MovieDesc() {
   console.log(movieData);
 
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: 'black' }}>
       <MovieDetails movie={movieData} />
     </View>
   )
