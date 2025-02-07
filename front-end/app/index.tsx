@@ -8,10 +8,10 @@ export default function Index() {
  
     useEffect(() => {
         const checkToken = async () => {
-            // await AsyncStorage.removeItem('token');
+            await AsyncStorage.removeItem('token');
             const token = await AsyncStorage.getItem('token');
             if (token) {
-                router.replace('/(home)/profile');
+                router.replace('/(home)');
             } else {
                 router.replace('/(auth)/login');
             }
