@@ -33,7 +33,7 @@ const useLogin = () => {
                     setEmail('');
                     setPassword('');
                     await AsyncStorage.setItem('token', response.data.token);
-                    router.replace('/(home)/profile');
+                    router.replace('/(home)');
                 }
 
             } catch (error: any) {
